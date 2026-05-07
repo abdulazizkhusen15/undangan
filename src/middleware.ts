@@ -2,25 +2,22 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  // Jalankan sesi Supabase (untuk user biasa)
-  const supabaseResponse = await updateSession(request)
   const { pathname } = request.nextUrl
 
-  // Proteksi Rute Super Admin
+  // 1. Proteksi Rute Super Admin (Jalankan ini sebelum redirect user biasa)
   if (pathname.startsWith('/super-admin')) {
-    // Jika mencoba akses login admin, biarkan lewat
     if (pathname === '/super-admin/login') {
-      return supabaseResponse
+      return NextResponse.next()
     }
 
-    // Jika akses rute admin lain, cek cookie session admin
     const session = request.cookies.get('super_admin_session')
     if (!session || session.value !== 'authenticated') {
       return NextResponse.redirect(new URL('/super-admin/login', request.url))
     }
   }
 
-  return supabaseResponse
+  // 2. Jalankan sesi Supabase (untuk user biasa)
+  return await updateSession(request)
 }
 
 export const config = {
