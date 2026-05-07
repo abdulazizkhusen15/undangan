@@ -1,23 +1,42 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/lib/supabase/middleware'
+import { createServerClient } from '@supabase/ssr'
 
 export async function middleware(request: NextRequest) {
+  const supabaseResponse = await updateSession(request)
   const { pathname } = request.nextUrl
 
-  // 1. Proteksi Rute Super Admin (Jalankan ini sebelum redirect user biasa)
+  // Proteksi Rute Super Admin (hanya admin yang boleh akses)
   if (pathname.startsWith('/super-admin')) {
-    if (pathname === '/super-admin/login') {
-      return NextResponse.next()
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() { return request.cookies.getAll() },
+          setAll(cookiesToSet) { },
+        },
+      }
+    )
+
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      return NextResponse.redirect(new URL('/login', request.url))
     }
 
-    const session = request.cookies.get('super_admin_session')
-    if (!session || session.value !== 'authenticated') {
-      return NextResponse.redirect(new URL('/super-admin/login', request.url))
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single()
+
+    if (profile?.role !== 'admin') {
+      return NextResponse.redirect(new URL('/dashboard', request.url))
     }
   }
 
-  // 2. Jalankan sesi Supabase (untuk user biasa)
-  return await updateSession(request)
+  return supabaseResponse
 }
 
 export const config = {
