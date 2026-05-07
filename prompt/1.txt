@@ -1,0 +1,38 @@
+Bertindaklah sebagai Expert Full-Stack Developer. Saya ingin membangun Platform Undangan Digital yang modern, responsif, dan dinamis (mirip seperti helloguest.id) dari awal.
+
+Berikut adalah tech stack yang akan kita gunakan:
+- Frontend: Next.js (menggunakan App Router)
+- Styling: Tailwind CSS + Shadcn UI (untuk komponen UI yang cepat)
+- Backend & Database: Supabase (PostgreSQL, Authentication, dan Storage)
+- Deployment: Vercel
+
+### RUANG LINGKUP PROYEK & FITUR UTAMA
+Aplikasi ini memiliki dua sisi utama:
+
+1. DASHBOARD ADMIN (/dashboard) - Protected Routes
+- Autentikasi: Login/Register menggunakan Supabase Auth.
+- Manajemen Acara: Membuat dan mengedit detail acara (Info Mempelai, tanggal, lokasi, cerita perjalanan, galeri).
+- Manajemen Tamu (Mini CRM): Menambah tamu, membuat link undangan unik otomatis (?to=Nama_Tamu), dan melacak status RSVP secara real-time.
+- Analitik: Dashboard sederhana yang menampilkan total tamu yang diundang, hadir, menolak, dan belum merespons.
+
+2. HALAMAN UNDANGAN PUBLIK (/invite/[event_slug]) - Public Routes
+- Routing Dinamis: URL akan menentukan data acara mana yang ditampilkan. Sistem harus bisa membaca parameter URL (misal: ?to=Budi+Santoso) untuk memunculkan personalisasi sapaan nama tamu.
+- Bagian Halaman (Sections): Hero (Cover depan), Info Mempelai, Jadwal Acara & Hitung Mundur (Countdown), Lokasi (embed Google Maps), Galeri Foto, dan Form RSVP.
+- Fitur Tambahan: Pemutar musik background, form submit RSVP (langsung update ke database Supabase), dan Buku Tamu (Form ucapan/doa).
+
+### IDE SKEMA DATABASE (Sebagai referensi)
+Kita akan membutuhkan setidaknya tabel-tabel ini di Supabase:
+- `users`: Dikelola oleh sistem Supabase Auth.
+- `events`: id, user_id, slug (unik), title, date, location_details, dll.
+- `guests`: id, event_id, name, rsvp_status, whatsapp_number.
+- `greetings`: id, event_id, guest_name, message, created_at.
+
+### TUGAS PERTAMA KAMU:
+Jangan menulis seluruh kode aplikasi sekaligus. Mari kita lakukan secara bertahap (step-by-step) untuk menjaga kualitas dan meminimalisir error.
+
+Langkah 1: 
+1. Berikan saya perintah terminal yang tepat untuk inisialisasi proyek Next.js lengkap dengan Tailwind dan dependensi yang dibutuhkan (Supabase client, Lucide React untuk ikon, dll).
+2. Berikan script SQL untuk membuat tabel awal (`events`, `guests`, `greetings`) dan setup kebijakan Row Level Security (RLS) di Supabase agar hanya pemilik acara yang bisa mengedit datanya, tetapi publik (anonim) bisa membaca data acara dan mengirim form RSVP & ucapan.
+3. Tunjukkan kepada saya bagaimana menyusun struktur folder di Next.js App Router untuk proyek spesifik ini.
+
+Tunggu konfirmasi dari saya (jangan generate kode UI dulu) sebelum lanjut ke Langkah 2 (Membangun UI).
