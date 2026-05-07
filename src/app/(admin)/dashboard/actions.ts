@@ -38,3 +38,38 @@ export async function createEvent(formData: FormData) {
   revalidatePath('/dashboard')
   redirect('/dashboard')
 }
+
+export async function addGuest(formData: FormData) {
+  const supabase = await createClient()
+  const event_id = formData.get('event_id') as string
+  const name = formData.get('name') as string
+  const whatsapp_number = formData.get('whatsapp_number') as string
+
+  const { error } = await supabase.from('guests').insert({
+    event_id,
+    name,
+    whatsapp_number,
+    rsvp_status: 'pending'
+  })
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath(`/dashboard/events/${event_id}`)
+}
+
+export async function deleteGuest(guestId: string, eventId: string) {
+  const supabase = await createClient()
+  
+  const { error } = await supabase
+    .from('guests')
+    .delete()
+    .eq('id', guestId)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath(`/dashboard/events/${eventId}`)
+}
