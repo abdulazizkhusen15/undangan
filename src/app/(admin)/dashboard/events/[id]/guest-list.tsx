@@ -74,7 +74,7 @@ export function GuestList({ eventId, eventSlug, initialGuests }: GuestListProps)
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Daftar Tamu</h2>
         <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-          <DialogTrigger asChild>
+          <DialogTrigger>
             <Button size="sm">
               <UserPlus className="mr-2 h-4 w-4" />
               Tambah Tamu
