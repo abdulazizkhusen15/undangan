@@ -2,16 +2,16 @@ import { Button } from '@/components/ui/button'
 import { Heart, Calendar, MapPin, Music, Clock, MessageCircle, ChevronLeft, Star, Crown, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 
-export default async function PublicTemplatePreviewPage({ 
+export default async function PublicTemplatePreviewPage({
   params,
-  searchParams 
-}: { 
+  searchParams
+}: {
   params: Promise<{ id: string }>,
   searchParams: Promise<{ from?: string }>
 }) {
   const { id } = await params
   const { from } = await searchParams
-  
+
   const backUrl = from === 'admin' ? '/super-admin' : '/dashboard'
   const backLabel = from === 'admin' ? 'Kembali ke Admin' : 'Kembali ke Katalog'
 
@@ -94,7 +94,7 @@ export default async function PublicTemplatePreviewPage({
             <div className="space-y-12 p-8 order-2 md:order-1">
               <div className="space-y-4">
                 <p className="text-xs font-bold tracking-[0.5em] uppercase text-slate-400">JOIN US ON OUR WEDDING</p>
-                <h1 className="text-7xl md:text-9xl font-light leading-none uppercase">KHUSEN <br/> & GITA</h1>
+                <h1 className="text-7xl md:text-9xl font-light leading-none uppercase">KHUSEN <br /> & GITA</h1>
               </div>
               <div className="space-y-2">
                 <p className="text-2xl font-medium text-slate-900">15 . 06 . 2026</p>
@@ -152,12 +152,12 @@ export default async function PublicTemplatePreviewPage({
           {/* Animated Patterns */}
           <div className="absolute inset-0 opacity-10 scale-150 rotate-12 bg-[url('https://www.transparenttextures.com/patterns/black-linen-2.png')]"></div>
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#0A192F] via-transparent to-[#0A192F] z-10"></div>
-          
+
           <div className="relative z-20 space-y-12 max-w-4xl animate-in fade-in slide-in-from-bottom-20 duration-1000">
             <Crown className="mx-auto h-16 w-16 text-[#E2C08D] animate-bounce" />
             <div className="space-y-4">
               <p className="uppercase tracking-[0.5em] text-xs font-sans font-bold text-[#E2C08D]/60">THE ROYAL WEDDING OF</p>
-              <h1 className="text-7xl md:text-8xl font-serif leading-tight text-white uppercase">KHUSEN <br/> & GITA</h1>
+              <h1 className="text-7xl md:text-8xl font-serif leading-tight text-white uppercase">KHUSEN <br /> & GITA</h1>
             </div>
             <div className="flex items-center justify-center gap-8 text-2xl tracking-[0.2em] font-light">
               <div className="h-[1px] w-20 bg-[#E2C08D]/40"></div>
@@ -175,9 +175,9 @@ export default async function PublicTemplatePreviewPage({
           <Sparkles className="absolute top-20 right-20 text-[#E2C08D]/20 h-40 w-40" />
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
             <div className="text-center space-y-8 order-2 md:order-1">
-              <h3 className="text-5xl font-serif italic text-white leading-relaxed">Abdul Aziz <br/> Khusen</h3>
+              <h3 className="text-5xl font-serif italic text-white leading-relaxed">Abdul Aziz <br /> Khusen</h3>
               <p className="text-[#E2C08D] text-lg font-medium tracking-widest uppercase">Putra Mahkota</p>
-              <h3 className="text-5xl font-serif italic text-white leading-relaxed mt-12">Agita <br/> Pratiwi</h3>
+              <h3 className="text-5xl font-serif italic text-white leading-relaxed mt-12">Agita <br /> Pratiwi</h3>
               <p className="text-[#E2C08D] text-lg font-medium tracking-widest uppercase">Putri Kerajaan</p>
             </div>
             <div className="relative order-1 md:order-2 group">
