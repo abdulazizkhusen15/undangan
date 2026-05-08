@@ -374,8 +374,8 @@ export default function PublicTemplatePreviewPage({
   // ── RED FLORAL 3D ──────────────────────────────────────────────────────────
   if (id === 'red-floral') {
     return (
-      <div className="min-h-screen bg-[#4A0404] text-[#FDF5E6] font-serif overflow-x-hidden selection:bg-[#D4AF37] selection:text-white">
-        <style dangerouslySetInnerHTML={{ __html: REVEAL_STYLE }} />
+      <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#4A0404] text-[#FDF5E6] font-serif selection:bg-[#D4AF37] selection:text-white">
+        <style dangerouslySetInnerHTML={{ __html: `${REVEAL_STYLE} .snap-section { scroll-snap-align: start; scroll-snap-stop: always; height: 100vh; position: relative; overflow: hidden; }` }} />
         
         {/* 3D Envelope Opening */}
         <AnimatePresence>
@@ -385,15 +385,15 @@ export default function PublicTemplatePreviewPage({
               exit={{ y: '-100%', opacity: 0, transition: { duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] } }}
               className="fixed inset-0 z-[9999] bg-[#2D0202] flex items-center justify-center p-6"
             >
-              <div className="absolute inset-0 opacity-20 bg-[url('/templates/red-floral/ornament.png')] bg-repeat bg-center" />
+          <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=1000&auto=format&fit=crop')] bg-repeat bg-center" />
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0, rotateY: 45 }}
                 animate={{ scale: 1, opacity: 1, rotateY: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
                 className="relative z-10 w-full max-w-md aspect-[3/4] bg-[#FDF5E6] rounded-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-10 overflow-hidden border-8 border-[#D4AF37]/20"
               >
-                <img src="/templates/red-floral/ornament.png" className="absolute top-0 right-0 w-40 h-40 opacity-20 rotate-90" alt="ornament" />
-                <img src="/templates/red-floral/ornament.png" className="absolute bottom-0 left-0 w-40 h-40 opacity-20 -rotate-90" alt="ornament" />
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=400&auto=format&fit=crop" className="absolute top-0 right-0 w-40 h-40 opacity-20 rotate-90" alt="ornament" />
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=400&auto=format&fit=crop" className="absolute bottom-0 left-0 w-40 h-40 opacity-20 -rotate-90" alt="ornament" />
                 
                 <div className="text-center space-y-4">
                   <p className="text-[#800000] tracking-[0.4em] text-xs font-bold uppercase">Wedding Invitation</p>
@@ -426,7 +426,7 @@ export default function PublicTemplatePreviewPage({
         <BackBtn href={backUrl} label={backLabel} />
 
         {/* Hero Section */}
-        <section className="h-screen relative flex items-center justify-center">
+        <section className="snap-section flex items-center justify-center">
           <motion.div 
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
@@ -449,27 +449,29 @@ export default function PublicTemplatePreviewPage({
             <p className="text-2xl text-[#D4AF37]/80 tracking-[0.2em] font-light italic">Sunday, 15 June 2026</p>
           </div>
           
-          {/* Decorative Corner Ornaments */}
-          <img src="/templates/red-floral/ornament.png" className="absolute top-0 left-0 w-64 h-64 opacity-40" alt="decor" />
-          <img src="/templates/red-floral/ornament.png" className="absolute bottom-0 right-0 w-64 h-64 opacity-40 rotate-180" alt="decor" />
+          {/* Decorative Corner Ornaments - Using high-quality roses */}
+          <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=400&auto=format&fit=crop" className="absolute top-0 left-0 w-64 h-64 opacity-60" alt="decor" />
+          <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=400&auto=format&fit=crop" className="absolute bottom-0 right-0 w-64 h-64 opacity-60 rotate-180" alt="decor" />
         </section>
 
-        <FormalGreeting themeColor="#D4AF37" />
+        <section className="snap-section flex items-center justify-center">
+          <FormalGreeting themeColor="#D4AF37" />
+        </section>
 
         {/* Mempelai Section */}
-        <section className="py-24 px-6 relative overflow-hidden">
+        <section className="snap-section py-24 px-6">
           {/* Animated Background Ornaments */}
           <motion.img 
             animate={{ y: [0, 20, 0], rotate: [0, 5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            src="/templates/red-floral/ornament.png" 
-            className="absolute top-0 right-0 w-80 h-80 opacity-10 pointer-events-none" 
+            src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=600&auto=format&fit=crop" 
+            className="absolute top-0 right-0 w-80 h-80 opacity-20 pointer-events-none" 
           />
           <motion.img 
             animate={{ y: [0, -20, 0], rotate: [0, -5, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            src="/templates/red-floral/ornament.png" 
-            className="absolute bottom-0 left-0 w-80 h-80 opacity-10 pointer-events-none rotate-180" 
+            src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=600&auto=format&fit=crop" 
+            className="absolute bottom-0 left-0 w-80 h-80 opacity-20 pointer-events-none rotate-180" 
           />
 
           <div className="absolute top-1/2 left-0 w-full h-px bg-[#D4AF37]/20" />
@@ -506,15 +508,25 @@ export default function PublicTemplatePreviewPage({
           </div>
         </section>
 
-        <JourneyTimeline themeColor="#D4AF37" />
-        <GallerySection themeColor="#D4AF37" />
-        <WeddingDaySection themeColor="#D4AF37" />
+        <section className="snap-section flex items-center justify-center">
+          <JourneyTimeline themeColor="#D4AF37" />
+        </section>
+        <section className="snap-section flex items-center justify-center">
+          <GallerySection themeColor="#D4AF37" />
+        </section>
+        <section className="snap-section flex items-center justify-center">
+          <WeddingDaySection themeColor="#D4AF37" />
+        </section>
         
-        <GiftSection onCopy={handleCopy} />
-        <WishesSection themeColor="#D4AF37" />
+        <section className="snap-section flex items-center justify-center">
+          <GiftSection onCopy={handleCopy} />
+        </section>
+        <section className="snap-section flex items-center justify-center">
+          <WishesSection themeColor="#D4AF37" />
+        </section>
 
-        <footer className="py-32 text-center bg-[#2D0202] relative overflow-hidden">
-          <img src="/templates/red-floral/ornament.png" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-5 pointer-events-none" alt="bg" />
+        <footer className="snap-section flex items-center justify-center bg-[#2D0202]">
+          <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=1000&auto=format&fit=crop" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-5 pointer-events-none" alt="bg" />
           <div className="relative z-10 space-y-6">
             <Heart className="mx-auto text-[#D4AF37] h-10 w-10 animate-beat" />
             <h3 className="text-6xl italic text-white">Khusen & Gita</h3>

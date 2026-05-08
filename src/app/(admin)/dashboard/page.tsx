@@ -37,7 +37,7 @@ const TEMPLATES = [
     name: 'Red Floral 3D',
     description: 'Template interaktif dengan animasi 3D yang memukau dan ornamen floral merah mewah.',
     price: 'Rp 349.000',
-    image: '/templates/red-floral-thumb.png',
+    image: 'https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=600&auto=format&fit=crop',
     category: 'Terbaru',
     features: ['3D Interactive', 'Luxury Animations', 'Premium Ornaments']
   }
