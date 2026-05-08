@@ -342,31 +342,114 @@ export default function PublicTemplatePreviewPage({
   // ── ROYAL GOLD ────────────────────────────────────────────────────────────
   if (id === 'royal') {
     return (
-      <div className="min-h-screen bg-[#0A192F] text-[#E2C08D] font-serif overflow-x-hidden">
-        <style dangerouslySetInnerHTML={{ __html: REVEAL_STYLE }} />
+      <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#0A192F] text-[#E2C08D] font-serif selection:bg-[#E2C08D] selection:text-[#0A192F]">
+        <style dangerouslySetInnerHTML={{ __html: `${REVEAL_STYLE} .snap-section { scroll-snap-align: start; scroll-snap-stop: always; height: 100vh; position: relative; overflow: hidden; }` }} />
         <CoverSection names="Khusen & Gita" imageUrl="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" hasOpened={hasOpened} onOpen={handleOpen} />
         <FloatingMusic isPlaying={isPlaying} onToggle={() => setIsPlaying(p => !p)} />
         <BackBtn href={backUrl} label={backLabel} />
 
-        <section className="h-screen flex flex-col items-center justify-center text-center reveal">
-          <Crown className="w-14 h-14 mb-8 text-[#E2C08D] animate-bounce" />
-          <p className="uppercase tracking-[0.5em] text-xs text-[#E2C08D]/60 mb-4">The Royal Wedding of</p>
-          <h1 className="text-7xl md:text-8xl uppercase text-white">KHUSEN<br/>&amp; GITA</h1>
-          <p className="text-2xl mt-8 tracking-[0.3em]">20 . 08 . 2026</p>
+        <section className="snap-section flex flex-col items-center justify-center text-center">
+          {/* Moving Gold Ornaments */}
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 left-0 w-64 h-64 border-[20px] border-[#E2C08D]/10 rounded-full -translate-x-1/2 -translate-y-1/2"
+          />
+          <motion.div 
+            animate={{ rotate: -360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-0 right-0 w-96 h-96 border-[30px] border-[#E2C08D]/5 rounded-full translate-x-1/3 translate-y-1/3"
+          />
+          
+          <motion.div 
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            className="relative z-10"
+          >
+            <Crown className="w-16 h-16 mb-8 text-[#E2C08D] mx-auto" />
+            <p className="uppercase tracking-[0.8em] text-sm text-[#E2C08D]/60 mb-6">The Royal Wedding of</p>
+            <h1 className="text-8xl md:text-9xl uppercase text-white font-bold leading-none tracking-tighter">KHUSEN<br/>&amp; GITA</h1>
+            <div className="h-px w-48 bg-[#E2C08D] mx-auto mt-10" />
+            <p className="text-3xl mt-8 tracking-[0.4em] font-light italic">20 . 08 . 2026</p>
+          </motion.div>
         </section>
-        <FormalGreeting themeColor="#E2C08D" />
-        <section className="py-16 px-6 bg-[#0D253F] reveal">
-          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 text-center">
-            <div className="space-y-4"><div className="border-4 border-[#E2C08D] p-1"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" className="w-full h-96 object-cover" alt="bride" /></div><h3 className="text-3xl italic text-white">Agita Pratiwi</h3></div>
-            <div className="space-y-4"><div className="border-4 border-[#E2C08D] p-1"><img src="https://images.unsplash.com/photo-1550005816-193a68a15db1?q=80&w=600&auto=format&fit=crop" className="w-full h-96 object-cover" alt="groom" /></div><h3 className="text-3xl italic text-white">Abdul Aziz Khusen</h3></div>
+
+        <section className="snap-section flex items-center justify-center">
+          <FormalGreeting themeColor="#E2C08D" />
+        </section>
+
+        <section className="snap-section flex items-center justify-center bg-[#0D253F]">
+          {/* Moving Floral Background */}
+          <motion.img 
+            animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+            transition={{ duration: 8, repeat: Infinity }}
+            src="https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1000&auto=format&fit=crop"
+            className="absolute inset-0 w-full h-full object-cover mix-blend-overlay pointer-events-none"
+          />
+          
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 text-center relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="space-y-6"
+            >
+              <div className="relative inline-block">
+                <div className="absolute -inset-4 border border-[#E2C08D] transform rotate-3" />
+                <div className="absolute -inset-4 border border-[#E2C08D]/50 transform -rotate-3" />
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" className="relative z-10 w-full h-96 object-cover shadow-2xl" alt="bride" />
+              </div>
+              <h3 className="text-4xl italic text-white mt-6">Agita Pratiwi</h3>
+              <p className="text-[#E2C08D]/60 tracking-widest uppercase text-sm">Putri dari Bapak Ahmad & Ibu Siti</p>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="space-y-6"
+            >
+              <div className="relative inline-block">
+                <div className="absolute -inset-4 border border-[#E2C08D] transform -rotate-3" />
+                <div className="absolute -inset-4 border border-[#E2C08D]/50 transform rotate-3" />
+                <img src="https://images.unsplash.com/photo-1550005816-193a68a15db1?q=80&w=600&auto=format&fit=crop" className="relative z-10 w-full h-96 object-cover shadow-2xl" alt="groom" />
+              </div>
+              <h3 className="text-4xl italic text-white mt-6">Abdul Aziz Khusen</h3>
+              <p className="text-[#E2C08D]/60 tracking-widest uppercase text-sm">Putra dari Bapak Bambang & Ibu Laksmi</p>
+            </motion.div>
           </div>
         </section>
-        <JourneyTimeline themeColor="#E2C08D" />
-        <GallerySection themeColor="#E2C08D" />
-        <WeddingDaySection themeColor="#E2C08D" />
-        <GiftSection onCopy={handleCopy} />
-        <WishesSection themeColor="#E2C08D" />
-        <footer className="py-16 text-center bg-[#0A192F] reveal"><Crown className="mx-auto w-8 h-8 text-[#E2C08D] mb-4" /><h3 className="text-4xl italic text-white">Khusen & Gita</h3><p className="text-[#E2C08D] text-xs mt-2 tracking-widest uppercase">The Royal Wedding</p></footer>
+
+        <section className="snap-section flex items-center justify-center">
+          <JourneyTimeline themeColor="#E2C08D" />
+        </section>
+        
+        <section className="snap-section flex items-center justify-center">
+          <GallerySection themeColor="#E2C08D" />
+        </section>
+        
+        <section className="snap-section flex items-center justify-center">
+          <WeddingDaySection themeColor="#E2C08D" />
+        </section>
+        
+        <section className="snap-section flex items-center justify-center">
+          <GiftSection onCopy={handleCopy} />
+        </section>
+        
+        <section className="snap-section flex items-center justify-center">
+          <WishesSection themeColor="#E2C08D" />
+        </section>
+
+        <footer className="snap-section flex flex-col items-center justify-center bg-[#0A192F]">
+          <motion.div 
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="text-center space-y-8"
+          >
+            <Crown className="mx-auto w-12 h-12 text-[#E2C08D] mb-4" />
+            <h3 className="text-6xl italic text-white">Khusen & Gita</h3>
+            <p className="text-[#E2C08D] text-sm tracking-[0.8em] uppercase">The Royal Wedding</p>
+          </motion.div>
+        </footer>
       </div>
     )
   }

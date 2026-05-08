@@ -28,7 +28,7 @@ const TEMPLATES = [
     name: 'Royal Gold',
     description: 'Nuansa mewah kerajaan dengan aksen emas dan pola hias yang megah.',
     price: 'Rp 299.000',
-    image: '/templates/royal.png',
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop',
     category: 'Premium',
     features: ['Custom Music', 'VIP Guest Access', 'Video Background']
   },
