@@ -97,8 +97,10 @@ export default function TemplateCatalogPage() {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                  <Button className="w-full rounded-full bg-white text-black hover:bg-slate-100 shadow-lg">
-                    <Eye className="mr-2 h-4 w-4" /> Quick Preview
+                  <Button asChild className="w-full rounded-full bg-white text-black hover:bg-slate-100 shadow-lg cursor-pointer">
+                    <Link href={`/preview/${tpl.id}`}>
+                      <Eye className="mr-2 h-4 w-4" /> Quick Preview
+                    </Link>
                   </Button>
                 </div>
                 <Badge className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-slate-900 border-none px-4 py-1 font-semibold rounded-full shadow-sm">
@@ -107,7 +109,9 @@ export default function TemplateCatalogPage() {
               </div>
               <CardHeader className="pt-6">
                 <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-2xl font-bold text-slate-900 tracking-tight">{tpl.name}</CardTitle>
+                  <Link href={`/preview/${tpl.id}`}>
+                    <CardTitle className="text-2xl font-bold text-slate-900 tracking-tight hover:text-primary transition-colors cursor-pointer">{tpl.name}</CardTitle>
+                  </Link>
                   <span className="text-primary font-bold text-lg">{tpl.price}</span>
                 </div>
                 <CardDescription className="text-slate-600 leading-relaxed">

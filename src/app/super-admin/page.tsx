@@ -65,7 +65,7 @@ export default async function SuperAdminPage() {
         </div>
         <div className="grid gap-8 md:grid-cols-3">
           {TEMPLATES.map((tpl) => (
-            <Link href={`/super-admin/preview/${tpl.id}`} key={tpl.id} className="block group">
+            <Link href={`/preview/${tpl.id}?from=admin`} key={tpl.id} className="block group">
               <Card className="overflow-hidden border-none shadow-md group-hover:shadow-2xl transition-all duration-500 rounded-[2rem] bg-white relative">
                 <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-white/90 backdrop-blur-md p-2 rounded-full shadow-lg">
