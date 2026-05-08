@@ -232,7 +232,7 @@ export default function PublicTemplatePreviewPage({
   const backLabel = from === 'admin' ? 'Kembali ke Admin' : 'Kembali ke Katalog'
 
   useEffect(() => {
-    const music = new Audio('https://www.bensound.com/bensound-music/bensound-love.mp3')
+    const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')
     music.loop = true
     setAudio(music)
     return () => { music.pause(); music.src = '' }
