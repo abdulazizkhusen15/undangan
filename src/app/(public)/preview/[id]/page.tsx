@@ -6,8 +6,7 @@ import {
   Heart, Calendar, MapPin, Music, Clock, 
   MessageCircle, ChevronLeft, Star, Crown, 
   Sparkles, Gift, Copy, CheckCircle2, Send,
-  Volume2, VolumeX, MailOpen, Camera, Info,
-  History, MapIcon, Bell
+  Volume2, VolumeX, MailOpen, History, Bell
 } from 'lucide-react'
 import Link from 'next/link'
 import { toast } from 'sonner'
@@ -31,11 +30,15 @@ export default function PublicTemplatePreviewPage({
   const backUrl = from === 'admin' ? '/super-admin' : '/dashboard'
   const backLabel = from === 'admin' ? 'Kembali ke Admin' : 'Kembali ke Katalog'
 
+  // Initialize Audio with a more suitable wedding song (instrumental)
   useEffect(() => {
-    const music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')
+    const music = new Audio('https://www.bensound.com/bensound-music/bensound-love.mp3') // Beautiful instrumental
     music.loop = true
     setAudio(music)
-    return () => music.pause()
+    return () => {
+      music.pause()
+      music.src = ""
+    }
   }, [])
 
   useEffect(() => {
@@ -72,103 +75,7 @@ export default function PublicTemplatePreviewPage({
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100)
   }
 
-  // --- REUSABLE COMPONENTS ---
-
-  const SectionTitle = ({ title, subtitle, color }: { title: string, subtitle?: string, color: string }) => (
-    <div className="text-center space-y-4 mb-16 reveal">
-      <h2 className="text-4xl md:text-5xl font-serif italic" style={{ color }}>{title}</h2>
-      {subtitle && <p className="text-slate-500 uppercase tracking-[0.3em] text-xs font-bold">{subtitle}</p>}
-      <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: color }}></div>
-    </div>
-  )
-
-  const JourneyTimeline = ({ themeColor }: { themeColor: string }) => (
-    <section className="py-24 px-6 reveal">
-      <SectionTitle title="Our Journey" subtitle="Kisah Cinta Kami" color={themeColor} />
-      <div className="max-w-4xl mx-auto space-y-12">
-        {[
-          { date: 'Mei 2022', title: 'Pertama Bertemu', desc: 'Pertemuan pertama kami di sebuah cafe kecil di Jakarta, berawal dari hobi yang sama.' },
-          { date: 'Januari 2023', title: 'Menjalin Kasih', desc: 'Setelah sekian lama saling mengenal, kami memutuskan untuk memulai lembaran baru bersama.' },
-          { date: 'Maret 2024', title: 'Lamaran', desc: 'Di depan keluarga besar, kami mengikrarkan janji untuk melangkah ke jenjang pernikahan.' }
-        ].map((item, i) => (
-          <div key={i} className="flex gap-6 items-start relative group">
-            <div className="w-16 h-16 rounded-full shrink-0 flex items-center justify-center font-bold shadow-lg text-white" style={{ backgroundColor: themeColor }}>
-              <History className="w-6 h-6" />
-            </div>
-            <div className="space-y-2 pb-8">
-              <span className="text-sm font-bold opacity-60 tracking-widest uppercase">{item.date}</span>
-              <h4 className="text-2xl font-serif italic">{item.title}</h4>
-              <p className="text-slate-500 leading-relaxed max-w-lg">{item.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-
-  const GalleryGrid = ({ themeColor }: { themeColor: string }) => (
-    <section className="py-24 px-6 reveal">
-      <SectionTitle title="Our Gallery" subtitle="Momen Bahagia" color={themeColor} />
-      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
-        {[
-          { url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1887&auto=format&fit=crop', span: 'md:col-span-1 md:row-span-2' },
-          { url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop', span: '' },
-          { url: 'https://images.unsplash.com/photo-1522673607200-1648832cee98?q=80&w=2070&auto=format&fit=crop', span: '' },
-          { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop', span: 'md:col-span-2' },
-          { url: 'https://images.unsplash.com/photo-1465495910483-0d674115f97d?q=80&w=2070&auto=format&fit=crop', span: '' },
-        ].map((img, i) => (
-          <div key={i} className={`relative overflow-hidden rounded-2xl group shadow-xl ${img.span}`}>
-            <img src={img.url} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-
-  const WeddingDay = ({ themeColor }: { themeColor: string }) => (
-    <section className="py-24 px-6 bg-white reveal">
-      <SectionTitle title="Wedding Day" subtitle="Detail Acara" color={themeColor} />
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-        <div className="p-10 rounded-[3rem] border-2 space-y-8 text-center bg-slate-50 transition-all hover:shadow-2xl" style={{ borderColor: themeColor }}>
-          <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-white" style={{ backgroundColor: themeColor }}>
-            <Calendar className="w-8 h-8" />
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-3xl font-serif italic">Akad Nikah</h3>
-            <div className="flex items-center justify-center gap-2 text-slate-500 font-bold tracking-widest text-sm">
-              <Clock className="w-4 h-4" /> 09.00 - 11.00 WIB
-            </div>
-          </div>
-          <div className="space-y-4">
-            <p className="text-xl font-bold">Gedung Kencana</p>
-            <p className="text-slate-500 italic">Jl. Mawar No. 45, Jakarta Selatan</p>
-            <Button className="w-full rounded-full py-6 font-bold shadow-lg" style={{ backgroundColor: themeColor }}>
-              <MapPin className="mr-2 h-4 w-4" /> Google Maps
-            </Button>
-          </div>
-        </div>
-        <div className="p-10 rounded-[3rem] border-2 space-y-8 text-center text-white transition-all hover:shadow-2xl" style={{ backgroundColor: themeColor, borderColor: themeColor }}>
-          <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center bg-white" style={{ color: themeColor }}>
-            <Bell className="w-8 h-8" />
-          </div>
-          <div className="space-y-2 text-white/90">
-            <h3 className="text-3xl font-serif italic text-white">Resepsi</h3>
-            <div className="flex items-center justify-center gap-2 font-bold tracking-widest text-sm">
-              <Clock className="w-4 h-4" /> 12.00 - 15.00 WIB
-            </div>
-          </div>
-          <div className="space-y-4">
-            <p className="text-xl font-bold">Gedung Kencana</p>
-            <p className="text-white/70 italic">Jl. Mawar No. 45, Jakarta Selatan</p>
-            <Button variant="outline" className="w-full rounded-full py-6 font-bold border-white text-white hover:bg-white hover:text-slate-900 transition-all">
-              <Calendar className="mr-2 h-4 w-4" /> Save the Date
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+  // --- REUSABLE SECTIONS ---
 
   const FormalGreeting = ({ themeColor, bg }: { themeColor: string, bg: string }) => (
     <section className={`py-24 px-6 text-center reveal ${bg}`}>
@@ -182,31 +89,143 @@ export default function PublicTemplatePreviewPage({
     </section>
   )
 
+  const JourneyTimeline = ({ themeColor }: { themeColor: string }) => (
+    <section className="py-24 px-6 reveal">
+      <div className="text-center space-y-4 mb-16">
+        <h2 className="text-4xl md:text-5xl font-serif italic" style={{ color: themeColor }}>Our Journey</h2>
+        <p className="text-slate-500 uppercase tracking-[0.3em] text-xs font-bold">Kisah Cinta Kami</p>
+      </div>
+      <div className="max-w-4xl mx-auto space-y-12">
+        {[
+          { date: 'Mei 2022', title: 'Pertama Bertemu', desc: 'Pertemuan pertama kami yang berawal dari hobi yang sama.' },
+          { date: 'Januari 2023', title: 'Menjalin Kasih', desc: 'Kami memutuskan untuk melangkah bersama dalam komitmen.' },
+          { date: 'Maret 2024', title: 'Lamaran', desc: 'Janji suci di hadapan keluarga untuk membangun rumah tangga.' }
+        ].map((item, i) => (
+          <div key={i} className="flex gap-6 items-start">
+            <div className="w-16 h-16 rounded-full shrink-0 flex items-center justify-center text-white shadow-lg" style={{ backgroundColor: themeColor }}>
+              <History className="w-6 h-6" />
+            </div>
+            <div className="space-y-1">
+              <span className="text-xs font-bold opacity-60 uppercase">{item.date}</span>
+              <h4 className="text-2xl font-serif italic">{item.title}</h4>
+              <p className="text-slate-500 leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+
+  const GallerySection = ({ themeColor }: { themeColor: string }) => (
+    <section className="py-24 px-6 reveal">
+      <div className="text-center space-y-4 mb-16">
+        <h2 className="text-4xl md:text-5xl font-serif italic" style={{ color: themeColor }}>Our Gallery</h2>
+        <p className="text-slate-500 uppercase tracking-[0.3em] text-xs font-bold">Momen Indah Kami</p>
+      </div>
+      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
+        {[
+          'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1887&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1522673607200-1648832cee98?q=80&w=2070&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1465495910483-0d674115f97d?q=80&w=2070&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'
+        ].map((url, i) => (
+          <div key={i} className="aspect-square rounded-2xl overflow-hidden shadow-lg group">
+            <img src={url} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+
+  const WeddingDaySection = ({ themeColor }: { themeColor: string }) => (
+    <section className="py-24 px-6 bg-slate-50 reveal">
+      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+        <div className="p-10 rounded-[3rem] border-2 space-y-8 text-center bg-white" style={{ borderColor: themeColor }}>
+          <Calendar className="w-12 h-12 mx-auto" style={{ color: themeColor }} />
+          <div className="space-y-4">
+            <h3 className="text-3xl font-serif italic">Akad Nikah</h3>
+            <p className="font-bold">Pukul 09.00 - 11.00 WIB</p>
+            <p>Gedung Kencana, Jakarta Selatan</p>
+            <Button className="w-full rounded-full" style={{ backgroundColor: themeColor }}>Lihat Lokasi</Button>
+          </div>
+        </div>
+        <div className="p-10 rounded-[3rem] space-y-8 text-center text-white" style={{ backgroundColor: themeColor }}>
+          <Clock className="w-12 h-12 mx-auto text-white" />
+          <div className="space-y-4">
+            <h3 className="text-3xl font-serif italic">Resepsi</h3>
+            <p className="font-bold">Pukul 12.00 - 15.00 WIB</p>
+            <p>Gedung Kencana, Jakarta Selatan</p>
+            <Button variant="outline" className="w-full rounded-full border-white text-white">Simpan Jadwal</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+
+  const GiftAndWishes = ({ themeColor }: { themeColor: string }) => (
+    <>
+      <section className="py-24 px-6 text-center reveal">
+        <Gift className="mx-auto h-12 w-12 mb-8" style={{ color: themeColor }} />
+        <h2 className="text-4xl font-serif italic mb-12">Wedding Gift</h2>
+        <div className="max-w-lg mx-auto bg-white p-8 rounded-3xl shadow-xl border border-slate-100 space-y-4">
+          <p className="text-sm font-bold tracking-widest text-slate-400">BCA - Abdul Aziz Khusen</p>
+          <p className="text-3xl font-bold">1234567890</p>
+          <Button variant="outline" onClick={() => handleCopy('1234567890')} className="rounded-full w-full">Salin No. Rekening</Button>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 bg-slate-50 reveal">
+        <div className="max-w-3xl mx-auto space-y-12">
+          <div className="text-center">
+            <MessageCircle className="mx-auto h-12 w-12 opacity-30 mb-4" />
+            <h2 className="text-4xl font-serif italic">Pray & Wishes</h2>
+          </div>
+          <div className="bg-white p-8 rounded-[2rem] shadow-xl space-y-4">
+            <input type="text" placeholder="Nama Anda" className="w-full bg-slate-50 border-none rounded-xl p-4 outline-none" />
+            <textarea placeholder="Ucapan & Doa..." rows={3} className="w-full bg-slate-50 border-none rounded-xl p-4 outline-none" />
+            <Button className="w-full rounded-full py-6 font-bold shadow-lg" style={{ backgroundColor: themeColor }}>Kirim Ucapan</Button>
+          </div>
+          <div className="space-y-4 pt-8 text-left">
+            <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100">
+              <h4 className="font-bold">Siti Aminah</h4>
+              <p className="text-slate-500 italic text-sm mt-1">"Selamat ya Khusen & Gita! Sakinah Mawaddah Warahmah."</p>
+            </div>
+            <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100">
+              <h4 className="font-bold">Bambang S.</h4>
+              <p className="text-slate-500 italic text-sm mt-1">"Bahagia selalu untuk kalian berdua!"</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+
   const CoverSection = ({ names, imageUrl }: { names: string, imageUrl: string }) => (
-    <div className={`fixed inset-0 z-[9999] transition-all duration-[1500ms] ease-in-out flex flex-col items-center justify-center overflow-hidden ${hasOpened ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
+    <div className={`fixed inset-0 z-[9999] transition-all duration-[1200ms] ease-in-out flex flex-col items-center justify-center ${hasOpened ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
       <div className="absolute inset-0 bg-black/60 z-10" />
-      <img src={imageUrl} className="absolute inset-0 w-full h-full object-cover scale-110" />
+      <img src={imageUrl} className="absolute inset-0 w-full h-full object-cover" />
       <div className="relative z-20 text-white text-center p-6 space-y-12 max-w-lg">
-        <div className="space-y-6">
-          <p className="uppercase tracking-[0.6em] text-xs font-bold opacity-80">Wedding Invitation</p>
-          <div className="w-12 h-[1px] bg-white/40 mx-auto"></div>
-          <h1 className="text-6xl md:text-8xl font-serif italic drop-shadow-2xl">{names}</h1>
+        <h1 className="text-6xl md:text-8xl font-serif italic">{names}</h1>
+        <div className="space-y-2">
+          <p className="text-sm opacity-70 tracking-widest">KAMI MENGUNDANG ANDA</p>
+          <h3 className="text-2xl font-bold">Tamu Undangan</h3>
         </div>
-        <div className="space-y-4">
-          <p className="text-sm opacity-70 tracking-widest uppercase">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <h3 className="text-2xl font-bold tracking-tight">Tamu Undangan</h3>
-        </div>
-        <Button onClick={handleOpenInvitation} className="group rounded-full px-16 py-10 bg-white text-slate-900 hover:bg-slate-100 shadow-2xl transition-all duration-500 scale-110 hover:scale-125">
-          <MailOpen className="mr-3 h-6 w-6 transition-transform group-hover:rotate-12" /> 
-          <span className="font-bold tracking-widest uppercase text-sm">Buka Undangan</span>
+        <Button onClick={handleOpenInvitation} className="rounded-full px-16 py-10 bg-white text-slate-900 hover:bg-slate-100 shadow-2xl font-bold">
+          <MailOpen className="mr-3 h-6 w-6" /> BUKA UNDANGAN
         </Button>
       </div>
     </div>
   )
 
   const FloatingControls = () => (
-    <div className="fixed bottom-6 right-6 z-[100] flex flex-col gap-4">
-      <Button onClick={() => setIsPlaying(!isPlaying)} variant="secondary" className="h-14 w-14 rounded-full shadow-2xl p-0 bg-white/90 backdrop-blur-md border-none hover:scale-110 transition-transform">
+    <div className="fixed bottom-6 right-6 z-[100]">
+      <Button 
+        onClick={() => setIsPlaying(!isPlaying)}
+        variant="secondary" 
+        className="h-14 w-14 rounded-full shadow-2xl p-0 bg-white/90 backdrop-blur-md border-none"
+      >
         {isPlaying ? <Volume2 className="h-6 w-6 text-primary" /> : <VolumeX className="h-6 w-6 text-slate-400" />}
       </Button>
     </div>
@@ -214,7 +233,7 @@ export default function PublicTemplatePreviewPage({
 
   const BackButton = () => (
     <div className="fixed top-6 left-6 z-[100]">
-      <Button asChild variant="secondary" className="rounded-full shadow-2xl bg-white/90 backdrop-blur-md border-none hover:bg-white hover:scale-105 transition-all px-6 py-6">
+      <Button asChild variant="secondary" className="rounded-full shadow-2xl bg-white/90 backdrop-blur-md border-none px-6 py-6">
         <Link href={backUrl}><ChevronLeft className="mr-2 h-4 w-4" /> {backLabel}</Link>
       </Button>
     </div>
@@ -225,74 +244,27 @@ export default function PublicTemplatePreviewPage({
   if (id === 'rustic') {
     return (
       <div className="min-h-screen bg-[#FDFBF7] text-[#5D4037] font-serif overflow-x-hidden">
-        <style dangerouslySetInnerHTML={{ __html: `
-          .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s ease-out; }
-          .reveal-active { opacity: 1; transform: translateY(0); }
-          .ornament-leaf { position: absolute; pointer-events: none; opacity: 0.1; }
-        `}} />
+        <style dangerouslySetInnerHTML={{ __html: `.reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; } .reveal-active { opacity: 1; transform: translateY(0); }` }} />
         <CoverSection names="Khusen & Gita" imageUrl="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" />
         <FloatingControls />
         <BackButton />
-
-        {/* HERO */}
-        <section className="relative h-screen flex flex-col items-center justify-center text-center p-6 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center reveal">
+        <section className="h-screen bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center flex items-center justify-center relative reveal">
           <div className="absolute inset-0 bg-black/40" />
-          <div className="relative z-10 text-white space-y-8">
-            <p className="uppercase tracking-[0.4em] text-sm font-sans font-medium">The Wedding of</p>
-            <h1 className="text-6xl md:text-8xl font-serif italic">Khusen & Gita</h1>
-            <p className="text-xl md:text-2xl font-light italic">Minggu, 12 Mei 2026</p>
+          <div className="relative z-10 text-white text-center space-y-6">
+            <h1 className="text-7xl italic">Khusen & Gita</h1>
+            <p className="text-xl">12 Mei 2026</p>
           </div>
         </section>
-
         <FormalGreeting themeColor="#D4A373" bg="bg-[#FDFBF7]" />
-
-        {/* MEMPELAI */}
-        <section className="py-24 px-6 bg-[#F5EBE0] reveal relative overflow-hidden">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div className="text-center space-y-6 group">
-              <div className="relative w-72 h-96 mx-auto rounded-[10rem] overflow-hidden border-8 border-white shadow-2xl transition-transform duration-700 group-hover:scale-105">
-                <img src="https://images.unsplash.com/photo-1594462759160-53c1b2add7bc?q=80&w=1887&auto=format&fit=crop" alt="Bride" className="w-full h-full object-cover" />
-              </div>
-              <h3 className="text-4xl font-serif italic">Agita Pratiwi</h3>
-              <p className="text-lg">Putri dari Bapak Ahmad Pratiwi & Ibu Siti Aminah</p>
-            </div>
-            <div className="text-center space-y-6 group">
-              <div className="relative w-72 h-96 mx-auto rounded-[10rem] overflow-hidden border-8 border-white shadow-2xl transition-transform duration-700 group-hover:scale-105">
-                <img src="https://images.unsplash.com/photo-1550005816-193a68a15db1?q=80&w=1887&auto=format&fit=crop" alt="Groom" className="w-full h-full object-cover" />
-              </div>
-              <h3 className="text-4xl font-serif italic">Abdul Aziz Khusen</h3>
-              <p className="text-lg">Putra dari Bapak Bambang Khusen & Ibu Laksmi Dewi</p>
-            </div>
-          </div>
-        </section>
-
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 py-16 px-6 reveal text-center">
+          <div><img src="https://images.unsplash.com/photo-1594462759160-53c1b2add7bc?q=80&w=1887&auto=format&fit=crop" className="w-64 h-80 mx-auto rounded-[8rem] object-cover border-8 border-white shadow-xl" /><h3 className="text-3xl mt-6">Agita Pratiwi</h3></div>
+          <div><img src="https://images.unsplash.com/photo-1550005816-193a68a15db1?q=80&w=1887&auto=format&fit=crop" className="w-64 h-80 mx-auto rounded-[8rem] object-cover border-8 border-white shadow-xl" /><h3 className="text-3xl mt-6">Abdul Aziz Khusen</h3></div>
+        </div>
         <JourneyTimeline themeColor="#D4A373" />
-        <GalleryGrid themeColor="#D4A373" />
-        <WeddingDay themeColor="#D4A373" />
-
-        <section className="py-24 px-6 text-center max-w-3xl mx-auto space-y-8 reveal">
-          <Heart className="mx-auto text-[#D4A373] h-10 w-10 animate-pulse" />
-          <p className="text-lg md:text-xl leading-relaxed italic text-[#8B5E3C]">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu..."</p>
-        </section>
-
-        <section className="py-24 bg-[#F5EBE0]/30"><div className="max-w-4xl mx-auto"><div className="grid md:grid-cols-2 gap-8 px-6 text-center">
-          <div className="bg-white p-8 rounded-3xl shadow-xl space-y-4">
-            <h4 className="font-bold text-slate-400 text-xs tracking-widest uppercase">Wedding Gift</h4>
-            <p className="text-2xl font-bold">1234567890</p>
-            <p className="font-medium">Abdul Aziz Khusen (BCA)</p>
-            <Button variant="outline" onClick={() => handleCopy('1234567890')} className="rounded-full w-full">Copy</Button>
-          </div>
-          <div className="bg-white p-8 rounded-3xl shadow-xl space-y-4">
-            <h4 className="font-bold text-slate-400 text-xs tracking-widest uppercase">Send Wish</h4>
-            <p className="text-slate-500 text-sm italic">Berikan ucapan terbaik Anda melalui kolom komentar di bawah.</p>
-          </div>
-        </div></div></section>
-
-        <footer className="py-20 text-center space-y-6 bg-white reveal">
-          <Heart className="mx-auto text-[#D4A373] h-6 w-6" />
-          <h3 className="text-4xl font-serif italic">Khusen & Gita</h3>
-          <p className="text-slate-400 text-xs tracking-widest uppercase">Terima Kasih</p>
-        </footer>
+        <GallerySection themeColor="#D4A373" />
+        <WeddingDaySection themeColor="#D4A373" />
+        <GiftAndWishes themeColor="#D4A373" />
+        <footer className="py-20 text-center bg-white"><Heart className="mx-auto text-[#D4A373] h-6 w-6 mb-4" /><h3 className="text-3xl italic">Khusen & Gita</h3></footer>
       </div>
     )
   }
@@ -300,40 +272,33 @@ export default function PublicTemplatePreviewPage({
   if (id === 'modern') {
     return (
       <div className="min-h-screen bg-white text-slate-900 font-sans tracking-tight overflow-x-hidden">
-        <style dangerouslySetInnerHTML={{ __html: `
-          .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-          .reveal-active { opacity: 1; transform: translateY(0); }
-        `}} />
+        <style dangerouslySetInnerHTML={{ __html: `.reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; } .reveal-active { opacity: 1; transform: translateY(0); }` }} />
         <CoverSection names="Khusen & Gita" imageUrl="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop" />
         <FloatingControls />
         <BackButton />
-
-        {/* HERO */}
-        <section className="relative h-screen flex items-center justify-center p-6 reveal">
-          <div className="absolute inset-10 border border-slate-100 pointer-events-none"></div>
-          <div className="grid md:grid-cols-2 gap-0 w-full max-w-7xl items-center">
-            <div className="space-y-12 p-8 order-2 md:order-1">
-              <div className="space-y-4">
-                <p className="text-xs font-bold tracking-[0.5em] uppercase text-slate-400">JOIN US ON OUR WEDDING</p>
-                <h1 className="text-7xl md:text-9xl font-light leading-none uppercase tracking-tighter">KHUSEN <br/> & GITA</h1>
-              </div>
-              <p className="text-2xl font-medium">15 . 06 . 2026 — JAKARTA</p>
-            </div>
-            <div className="relative h-[600px] md:h-[800px] order-1 md:order-2 overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop" className="w-full h-full object-cover" />
-            </div>
+        <section className="h-screen flex items-center justify-center p-12 reveal">
+          <div className="text-center space-y-6">
+            <p className="tracking-[0.5em] text-xs font-bold text-slate-400">THE WEDDING OF</p>
+            <h1 className="text-8xl font-light leading-none">KHUSEN <br/> & GITA</h1>
+            <p className="text-2xl font-medium">15 . 06 . 2026</p>
           </div>
         </section>
-
         <FormalGreeting themeColor="#000" bg="bg-white" />
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 py-16 px-6 reveal text-center">
+          <div className="space-y-4">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop" className="w-full h-96 object-cover grayscale" />
+            <h3 className="text-2xl font-bold uppercase tracking-widest">Agita Pratiwi</h3>
+          </div>
+          <div className="space-y-4">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop" className="w-full h-96 object-cover grayscale" />
+            <h3 className="text-2xl font-bold uppercase tracking-widest">Abdul Aziz Khusen</h3>
+          </div>
+        </div>
         <JourneyTimeline themeColor="#000" />
-        <GalleryGrid themeColor="#000" />
-        <WeddingDay themeColor="#000" />
-
-        <footer className="py-20 text-center space-y-6 bg-slate-900 text-white reveal">
-          <h3 className="text-4xl font-light tracking-tighter uppercase">Khusen & Gita</h3>
-          <p className="opacity-50 text-xs tracking-widest uppercase font-bold">Thank You For Coming</p>
-        </footer>
+        <GallerySection themeColor="#000" />
+        <WeddingDaySection themeColor="#000" />
+        <GiftAndWishes themeColor="#000" />
+        <footer className="py-20 text-center bg-slate-900 text-white"><h3 className="text-3xl uppercase tracking-tighter">Khusen & Gita</h3></footer>
       </div>
     )
   }
@@ -341,54 +306,31 @@ export default function PublicTemplatePreviewPage({
   if (id === 'royal') {
     return (
       <div className="min-h-screen bg-[#0A192F] text-[#E2C08D] font-serif overflow-x-hidden">
-        <style dangerouslySetInnerHTML={{ __html: `
-          .reveal { opacity: 0; transform: scale(0.95) translateY(40px); transition: all 1.2s ease-out; }
-          .reveal-active { opacity: 1; transform: scale(1) translateY(0); }
-        `}} />
+        <style dangerouslySetInnerHTML={{ __html: `.reveal { opacity: 0; transform: scale(0.95) translateY(30px); transition: all 1.2s ease-out; } .reveal-active { opacity: 1; transform: scale(1) translateY(0); }` }} />
         <CoverSection names="Khusen & Gita" imageUrl="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" />
         <FloatingControls />
         <BackButton />
-
-        {/* HERO */}
-        <section className="relative h-screen flex flex-col items-center justify-center text-center p-6 overflow-hidden reveal">
-          <div className="absolute inset-0 opacity-10 scale-150 rotate-12 bg-[url('https://www.transparenttextures.com/patterns/black-linen-2.png')]"></div>
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#0A192F] via-transparent to-[#0A192F] z-10"></div>
-          <div className="relative z-20 space-y-12 max-w-4xl">
-            <Crown className="mx-auto h-16 w-16 text-[#E2C08D] animate-bounce" />
-            <div className="space-y-4">
-              <p className="uppercase tracking-[0.5em] text-xs font-sans font-bold text-[#E2C08D]/60">THE ROYAL WEDDING OF</p>
-              <h1 className="text-7xl md:text-8xl font-serif leading-tight text-white uppercase">KHUSEN <br/> & GITA</h1>
-            </div>
-            <p className="text-2xl tracking-[0.2em] font-light">20 . 08 . 2026</p>
-          </div>
+        <section className="h-screen flex flex-col items-center justify-center text-center reveal">
+          <Crown className="w-16 h-16 mb-8 text-[#E2C08D] animate-bounce" />
+          <h1 className="text-8xl uppercase tracking-widest">Khusen & Gita</h1>
+          <p className="text-2xl mt-8 tracking-[0.3em]">20 . 08 . 2026</p>
         </section>
-
         <FormalGreeting themeColor="#E2C08D" bg="bg-[#0A192F]" />
-
-        <section className="py-24 px-6 bg-[#0D253F] reveal relative overflow-hidden">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
-            <div className="text-center space-y-8 order-2 md:order-1">
-              <h3 className="text-5xl font-serif italic text-white">Abdul Aziz Khusen</h3>
-              <p className="text-[#E2C08D] text-lg font-medium tracking-widest uppercase">Putra Mahkota</p>
-              <h3 className="text-5xl font-serif italic text-white mt-12">Agita Pratiwi</h3>
-              <p className="text-[#E2C08D] text-lg font-medium tracking-widest uppercase">Putri Kerajaan</p>
-            </div>
-            <div className="relative order-1 md:order-2 group">
-              <div className="absolute inset-0 border-2 border-[#E2C08D] translate-x-6 translate-y-6 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700"></div>
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" className="relative z-10 w-full h-[600px] object-cover shadow-2xl" />
-            </div>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 py-16 px-6 reveal text-center">
+          <div className="space-y-4">
+            <div className="border-4 border-[#E2C08D] p-2"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" className="w-full h-96 object-cover" /></div>
+            <h3 className="text-3xl italic">Agita Pratiwi</h3>
           </div>
-        </section>
-
+          <div className="space-y-4">
+            <div className="border-4 border-[#E2C08D] p-2"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" className="w-full h-96 object-cover" /></div>
+            <h3 className="text-3xl italic">Abdul Aziz Khusen</h3>
+          </div>
+        </div>
         <JourneyTimeline themeColor="#E2C08D" />
-        <GalleryGrid themeColor="#E2C08D" />
-        <WeddingDay themeColor="#E2C08D" />
-
-        <footer className="py-20 text-center space-y-6 bg-[#0A192F] reveal">
-          <Crown className="mx-auto text-[#E2C08D] h-8 w-8" />
-          <h3 className="text-4xl font-serif italic text-white uppercase">Khusen & Gita</h3>
-          <p className="text-[#E2C08D] text-xs tracking-widest uppercase">The Royal Wedding Finale</p>
-        </footer>
+        <GallerySection themeColor="#E2C08D" />
+        <WeddingDaySection themeColor="#E2C08D" />
+        <GiftAndWishes themeColor="#E2C08D" />
+        <footer className="py-20 text-center text-white"><Crown className="w-8 h-8 mx-auto mb-4" /><h3 className="text-4xl italic">Khusen & Gita</h3></footer>
       </div>
     )
   }
