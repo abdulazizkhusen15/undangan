@@ -6,33 +6,18 @@ export async function middleware(request: NextRequest) {
   const supabaseResponse = await updateSession(request)
   const { pathname } = request.nextUrl
 
-  // Proteksi Rute Super Admin (hanya admin yang boleh akses)
+  // Proteksi Rute Super Admin
   if (pathname.startsWith('/super-admin')) {
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() { return request.cookies.getAll() },
-          setAll(cookiesToSet) { },
-        },
-      }
-    )
-
-    const { data: { user } } = await supabase.auth.getUser()
-    
-    if (!user) {
-      return NextResponse.redirect(new URL('/login', request.url))
+    // Izinkan akses ke halaman login
+    if (pathname === '/super-admin/login') {
+      return supabaseResponse
     }
 
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', user.id)
-      .single()
-
-    if (profile?.role !== 'admin') {
-      return NextResponse.redirect(new URL('/dashboard', request.url))
+    // Cek session super admin (dari cookie)
+    const superAdminSession = request.cookies.get('super_admin_session')
+    
+    if (!superAdminSession || superAdminSession.value !== 'authenticated') {
+      return NextResponse.redirect(new URL('/super-admin/login', request.url))
     }
   }
 
