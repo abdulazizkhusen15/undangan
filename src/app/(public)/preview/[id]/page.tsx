@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState, use } from 'react'
 import { Button } from '@/components/ui/button'
-import { Heart, Calendar, Clock, MessageCircle, ChevronLeft, Crown, Gift, Copy, Send, Volume2, VolumeX, MailOpen, History, MapPin } from 'lucide-react'
+import { Heart, Calendar, Clock, MessageCircle, ChevronLeft, Crown, Gift, Copy, Send, Volume2, VolumeX, MailOpen, History, MapPin, Star } from 'lucide-react'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import { motion, AnimatePresence } from 'framer-motion'
 
 // ─── SUB-COMPONENTS (outside main to prevent remount on state change) ───────
 
@@ -366,6 +367,160 @@ export default function PublicTemplatePreviewPage({
         <GiftSection onCopy={handleCopy} />
         <WishesSection themeColor="#E2C08D" />
         <footer className="py-16 text-center bg-[#0A192F] reveal"><Crown className="mx-auto w-8 h-8 text-[#E2C08D] mb-4" /><h3 className="text-4xl italic text-white">Khusen & Gita</h3><p className="text-[#E2C08D] text-xs mt-2 tracking-widest uppercase">The Royal Wedding</p></footer>
+      </div>
+    )
+  }
+
+  // ── RED FLORAL 3D ──────────────────────────────────────────────────────────
+  if (id === 'red-floral') {
+    return (
+      <div className="min-h-screen bg-[#4A0404] text-[#FDF5E6] font-serif overflow-x-hidden selection:bg-[#D4AF37] selection:text-white">
+        <style dangerouslySetInnerHTML={{ __html: REVEAL_STYLE }} />
+        
+        {/* 3D Envelope Opening */}
+        <AnimatePresence>
+          {!hasOpened && (
+            <motion.div 
+              initial={{ opacity: 1 }}
+              exit={{ y: '-100%', opacity: 0, transition: { duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] } }}
+              className="fixed inset-0 z-[9999] bg-[#2D0202] flex items-center justify-center p-6"
+            >
+              <div className="absolute inset-0 opacity-20 bg-[url('/templates/red-floral/ornament.png')] bg-repeat bg-center" />
+              <motion.div 
+                initial={{ scale: 0.8, opacity: 0, rotateY: 45 }}
+                animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="relative z-10 w-full max-w-md aspect-[3/4] bg-[#FDF5E6] rounded-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-10 overflow-hidden border-8 border-[#D4AF37]/20"
+              >
+                <img src="/templates/red-floral/ornament.png" className="absolute top-0 right-0 w-40 h-40 opacity-20 rotate-90" alt="ornament" />
+                <img src="/templates/red-floral/ornament.png" className="absolute bottom-0 left-0 w-40 h-40 opacity-20 -rotate-90" alt="ornament" />
+                
+                <div className="text-center space-y-4">
+                  <p className="text-[#800000] tracking-[0.4em] text-xs font-bold uppercase">Wedding Invitation</p>
+                  <div className="h-px w-12 bg-[#D4AF37] mx-auto" />
+                </div>
+
+                <div className="text-center">
+                  <h1 className="text-6xl text-[#800000] font-serif italic mb-2 leading-tight">Khusen<br/>& Gita</h1>
+                  <p className="text-[#800000]/60 text-sm tracking-widest uppercase">15 . 06 . 2026</p>
+                </div>
+
+                <div className="text-center space-y-8 w-full">
+                  <div className="space-y-1">
+                    <p className="text-[#800000]/40 text-[10px] tracking-widest uppercase">Special Guest</p>
+                    <p className="text-xl text-[#800000] font-bold">Tamu Undangan</p>
+                  </div>
+                  <Button onClick={handleOpen} className="w-full bg-[#800000] hover:bg-[#600000] text-white rounded-none py-8 shadow-xl group overflow-hidden relative">
+                    <span className="relative z-10 flex items-center">
+                      <MailOpen className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform" /> BUKA UNDANGAN
+                    </span>
+                    <motion.div className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                  </Button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <FloatingMusic isPlaying={isPlaying} onToggle={() => setIsPlaying(p => !p)} />
+        <BackBtn href={backUrl} label={backLabel} />
+
+        {/* Hero Section */}
+        <section className="h-screen relative flex items-center justify-center">
+          <motion.div 
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+            className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"
+          />
+          <div className="absolute inset-0 bg-[#4A0404]/80 backdrop-blur-[2px]" />
+          
+          <div className="relative z-10 text-center space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="space-y-4"
+            >
+              <Star className="w-8 h-8 text-[#D4AF37] mx-auto animate-pulse" />
+              <p className="text-[#D4AF37] uppercase tracking-[0.6em] text-xs">The Wedding of</p>
+              <h1 className="text-8xl md:text-9xl italic text-white drop-shadow-2xl">Khusen & Gita</h1>
+            </motion.div>
+            <div className="h-px w-32 bg-[#D4AF37] mx-auto" />
+            <p className="text-2xl text-[#D4AF37]/80 tracking-[0.2em] font-light italic">Sunday, 15 June 2026</p>
+          </div>
+          
+          {/* Decorative Corner Ornaments */}
+          <img src="/templates/red-floral/ornament.png" className="absolute top-0 left-0 w-64 h-64 opacity-40" alt="decor" />
+          <img src="/templates/red-floral/ornament.png" className="absolute bottom-0 right-0 w-64 h-64 opacity-40 rotate-180" alt="decor" />
+        </section>
+
+        <FormalGreeting themeColor="#D4AF37" />
+
+        {/* Mempelai Section */}
+        <section className="py-24 px-6 relative overflow-hidden">
+          {/* Animated Background Ornaments */}
+          <motion.img 
+            animate={{ y: [0, 20, 0], rotate: [0, 5, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            src="/templates/red-floral/ornament.png" 
+            className="absolute top-0 right-0 w-80 h-80 opacity-10 pointer-events-none" 
+          />
+          <motion.img 
+            animate={{ y: [0, -20, 0], rotate: [0, -5, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            src="/templates/red-floral/ornament.png" 
+            className="absolute bottom-0 left-0 w-80 h-80 opacity-10 pointer-events-none rotate-180" 
+          />
+
+          <div className="absolute top-1/2 left-0 w-full h-px bg-[#D4AF37]/20" />
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ scale: 1.02, rotateY: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="text-center space-y-6 cursor-default"
+            >
+              <div className="relative inline-block group">
+                <div className="absolute -inset-4 border-2 border-[#D4AF37] rotate-6 group-hover:rotate-0 transition-transform duration-500" />
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop" className="relative z-10 w-64 h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl" alt="bride" />
+              </div>
+              <h3 className="text-4xl italic text-white">Agita Pratiwi</h3>
+              <p className="text-[#D4AF37]/60 text-sm tracking-widest uppercase">Putri dari Bapak Ahmad & Ibu Siti</p>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ scale: 1.02, rotateY: 10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="text-center space-y-6 cursor-default"
+            >
+              <div className="relative inline-block group">
+                <div className="absolute -inset-4 border-2 border-[#D4AF37] -rotate-6 group-hover:rotate-0 transition-transform duration-500" />
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" className="relative z-10 w-64 h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl" alt="groom" />
+              </div>
+              <h3 className="text-4xl italic text-white">Abdul Aziz Khusen</h3>
+              <p className="text-[#D4AF37]/60 text-sm tracking-widest uppercase">Putra dari Bapak Bambang & Ibu Laksmi</p>
+            </motion.div>
+          </div>
+        </section>
+
+        <JourneyTimeline themeColor="#D4AF37" />
+        <GallerySection themeColor="#D4AF37" />
+        <WeddingDaySection themeColor="#D4AF37" />
+        
+        <GiftSection onCopy={handleCopy} />
+        <WishesSection themeColor="#D4AF37" />
+
+        <footer className="py-32 text-center bg-[#2D0202] relative overflow-hidden">
+          <img src="/templates/red-floral/ornament.png" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-5 pointer-events-none" alt="bg" />
+          <div className="relative z-10 space-y-6">
+            <Heart className="mx-auto text-[#D4AF37] h-10 w-10 animate-beat" />
+            <h3 className="text-6xl italic text-white">Khusen & Gita</h3>
+            <p className="text-[#D4AF37] text-xs tracking-[1em] uppercase">Terima Kasih</p>
+          </div>
+        </footer>
       </div>
     )
   }
