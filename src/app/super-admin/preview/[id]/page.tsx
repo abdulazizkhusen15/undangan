@@ -23,9 +23,9 @@ export default async function TemplatePreviewPage({ params }: { params: Promise<
           <div className="absolute inset-0 bg-black/30" />
           <div className="relative z-10 text-white space-y-8 animate-in fade-in zoom-in duration-1000">
             <p className="uppercase tracking-[0.4em] text-sm font-sans font-medium">The Wedding of</p>
-            <h1 className="text-6xl md:text-8xl font-serif italic">Budi & Ani</h1>
+            <h1 className="text-6xl md:text-8xl font-serif italic">Khusen & Gita</h1>
             <div className="w-24 h-[1px] bg-white/50 mx-auto my-8"></div>
-            <p className="text-xl md:text-2xl font-light italic">Minggu, 12 Mei 2024</p>
+            <p className="text-xl md:text-2xl font-light italic">Minggu, 12 Mei 2026</p>
             <Button className="mt-12 bg-white/20 backdrop-blur-md text-white border border-white/40 hover:bg-white hover:text-black rounded-full px-10 py-6 transition-all duration-500 font-sans tracking-widest text-xs uppercase">
               Buka Undangan
             </Button>
@@ -48,15 +48,15 @@ export default async function TemplatePreviewPage({ params }: { params: Promise<
               <div className="relative w-72 h-96 mx-auto rounded-[10rem] overflow-hidden border-8 border-white shadow-2xl transition-transform duration-700 group-hover:scale-105">
                 <img src="https://images.unsplash.com/photo-1594462759160-53c1b2add7bc?q=80&w=1887&auto=format&fit=crop" alt="Bride" className="w-full h-full object-cover" />
               </div>
-              <h3 className="text-4xl font-serif italic">Ani Wijaya, S.T.</h3>
-              <p className="text-lg">Putri dari Bapak Ahmad Wijaya & Ibu Siti Aminah</p>
+              <h3 className="text-4xl font-serif italic">Agita Pratiwi</h3>
+              <p className="text-lg">Putri dari Bapak Ahmad Pratiwi & Ibu Siti Aminah</p>
             </div>
             <div className="text-center space-y-6 group">
               <div className="relative w-72 h-96 mx-auto rounded-[10rem] overflow-hidden border-8 border-white shadow-2xl transition-transform duration-700 group-hover:scale-105">
                 <img src="https://images.unsplash.com/photo-1550005816-193a68a15db1?q=80&w=1887&auto=format&fit=crop" alt="Groom" className="w-full h-full object-cover" />
               </div>
-              <h3 className="text-4xl font-serif italic">Budi Santoso, M.B.A.</h3>
-              <p className="text-lg">Putra dari Bapak Bambang Santoso & Ibu Laksmi Dewi</p>
+              <h3 className="text-4xl font-serif italic">Abdul Aziz Khusen</h3>
+              <p className="text-lg">Putra dari Bapak Bambang Khusen & Ibu Laksmi Dewi</p>
             </div>
           </div>
         </section>
@@ -84,10 +84,10 @@ export default async function TemplatePreviewPage({ params }: { params: Promise<
             <div className="space-y-12 p-8 order-2 md:order-1">
               <div className="space-y-4">
                 <p className="text-xs font-bold tracking-[0.5em] uppercase text-slate-400">JOIN US ON OUR WEDDING</p>
-                <h1 className="text-7xl md:text-9xl font-light leading-none">REZA <br/> & DINI</h1>
+                <h1 className="text-7xl md:text-9xl font-light leading-none uppercase">KHUSEN <br/> & GITA</h1>
               </div>
               <div className="space-y-2">
-                <p className="text-2xl font-medium">15 . 06 . 2024</p>
+                <p className="text-2xl font-medium text-slate-900">15 . 06 . 2026</p>
                 <p className="text-slate-500 uppercase tracking-widest text-xs">Saturday Afternoon — Jakarta</p>
               </div>
               <Button className="rounded-none bg-slate-900 text-white px-12 py-8 hover:bg-slate-700 transition-all text-xs tracking-widest">
@@ -113,12 +113,12 @@ export default async function TemplatePreviewPage({ params }: { params: Promise<
             </p>
             <div className="grid md:grid-cols-2 gap-20 py-20">
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold uppercase tracking-tighter">REZA PRATAMA</h3>
-                <p className="text-sm text-slate-400">Son of Mr. Robert & Mrs. Maria</p>
+                <h3 className="text-2xl font-bold uppercase tracking-tighter">Abdul Aziz Khusen</h3>
+                <p className="text-sm text-slate-400 font-medium">Son of Mr. Bambang Khusen & Mrs. Laksmi</p>
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold uppercase tracking-tighter">DINI KARTIKA</h3>
-                <p className="text-sm text-slate-400">Daughter of Mr. Johan & Mrs. Linda</p>
+                <h3 className="text-2xl font-bold uppercase tracking-tighter">Agita Pratiwi</h3>
+                <p className="text-sm text-slate-400 font-medium">Daughter of Mr. Ahmad Pratiwi & Mrs. Siti</p>
               </div>
             </div>
           </div>
@@ -150,11 +150,11 @@ export default async function TemplatePreviewPage({ params }: { params: Promise<
             <Crown className="mx-auto h-16 w-16 text-[#E2C08D] animate-bounce" />
             <div className="space-y-4">
               <p className="uppercase tracking-[0.5em] text-xs font-sans font-bold text-[#E2C08D]/60">THE ROYAL WEDDING OF</p>
-              <h1 className="text-7xl md:text-9xl font-serif leading-tight text-white">SULTAN <br/> & RATU</h1>
+              <h1 className="text-7xl md:text-8xl font-serif leading-tight text-white uppercase">KHUSEN <br/> & GITA</h1>
             </div>
             <div className="flex items-center justify-center gap-8 text-2xl tracking-[0.2em] font-light">
               <div className="h-[1px] w-20 bg-[#E2C08D]/40"></div>
-              <span>20 . 08 . 2024</span>
+              <span>20 . 08 . 2026</span>
               <div className="h-[1px] w-20 bg-[#E2C08D]/40"></div>
             </div>
             <Button className="bg-[#E2C08D] text-[#0A192F] hover:bg-white rounded-full px-16 py-8 text-sm font-bold tracking-[0.3em] shadow-2xl shadow-[#E2C08D]/20 transition-all duration-500">
@@ -172,11 +172,10 @@ export default async function TemplatePreviewPage({ params }: { params: Promise<
           <Sparkles className="absolute top-20 right-20 text-[#E2C08D]/20 h-40 w-40" />
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
             <div className="text-center space-y-8 order-2 md:order-1">
-              <h3 className="text-5xl font-serif italic text-white leading-relaxed">Sutan Syarif <br/> Hamengkubuwono</h3>
+              <h3 className="text-5xl font-serif italic text-white leading-relaxed">Abdul Aziz <br/> Khusen</h3>
               <p className="text-[#E2C08D] text-lg font-medium tracking-widest uppercase">Putra Mahkota</p>
-              <p className="text-white/60 leading-relaxed italic max-w-sm mx-auto">
-                "Cinta adalah mahkota terindah dalam kehidupan seorang raja, dan kesetiaan adalah tahta yang paling kokoh."
-              </p>
+              <h3 className="text-5xl font-serif italic text-white leading-relaxed mt-12">Agita <br/> Pratiwi</h3>
+              <p className="text-[#E2C08D] text-lg font-medium tracking-widest uppercase">Putri Kerajaan</p>
             </div>
             <div className="relative order-1 md:order-2 group">
               <div className="absolute inset-0 border-2 border-[#E2C08D] translate-x-6 translate-y-6 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700"></div>
