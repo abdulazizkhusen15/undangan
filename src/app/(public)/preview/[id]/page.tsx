@@ -475,11 +475,27 @@ export default function PublicTemplatePreviewPage({
                 transition={{ duration: 1, delay: 0.2 }}
                 className="relative z-10 w-full max-w-md aspect-[3/4] bg-[#FDF5E6] rounded-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-10 overflow-hidden border-8 border-[#D4AF37]/20"
               >
-                {/* Elegant Floral Frame Corners with Transparency Fix */}
-                <img src="/templates/red-floral/frame.png" className="absolute top-0 right-0 w-32 h-32 opacity-80 mix-blend-multiply" alt="ornament" />
-                <img src="/templates/red-floral/frame.png" className="absolute top-0 left-0 w-32 h-32 opacity-80 -rotate-90 mix-blend-multiply" alt="ornament" />
-                <img src="/templates/red-floral/frame.png" className="absolute bottom-0 left-0 w-32 h-32 opacity-80 rotate-180 mix-blend-multiply" alt="ornament" />
-                <img src="/templates/red-floral/frame.png" className="absolute bottom-0 right-0 w-32 h-32 opacity-80 rotate-90 mix-blend-multiply" alt="ornament" />
+                { {/* Elegant Floral Ornaments - Only 2 as requested */} }
+                <img 
+                  src="/templates/red-floral/frame.png" 
+                  className="absolute top-0 right-0 w-56 h-56 opacity-90 mix-blend-multiply" 
+                  style={{ 
+                    maskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)', 
+                    WebkitMaskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)',
+                    filter: 'brightness(1.1) contrast(1.1)'
+                  }}
+                  alt="ornament" 
+                />
+                <img 
+                  src="/templates/red-floral/frame.png" 
+                  className="absolute bottom-0 left-0 w-56 h-56 opacity-90 rotate-180 mix-blend-multiply" 
+                  style={{ 
+                    maskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)', 
+                    WebkitMaskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)',
+                    filter: 'brightness(1.1) contrast(1.1)'
+                  }}
+                  alt="ornament" 
+                />
                 
                 <div className="text-center space-y-4">
                   <p className="text-[#800000] tracking-[0.4em] text-xs font-bold uppercase">Wedding Invitation</p>
