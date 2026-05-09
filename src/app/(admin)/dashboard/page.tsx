@@ -28,7 +28,7 @@ const TEMPLATES = [
     name: 'Royal Gold',
     description: 'Nuansa mewah kerajaan dengan aksen emas dan pola hias yang megah.',
     price: 'Rp 299.000',
-    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop',
+    image: '/templates/royal.png',
     category: 'Premium',
     features: ['Custom Music', 'VIP Guest Access', 'Video Background']
   },
@@ -37,7 +37,7 @@ const TEMPLATES = [
     name: 'Red Floral 3D',
     description: 'Template interaktif dengan animasi 3D yang memukau dan ornamen floral merah mewah.',
     price: 'Rp 349.000',
-    image: 'https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=600&auto=format&fit=crop',
+    image: '/templates/red-floral.png',
     category: 'Terbaru',
     features: ['3D Interactive', 'Luxury Animations', 'Premium Ornaments']
   }

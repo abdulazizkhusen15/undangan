@@ -468,15 +468,15 @@ export default function PublicTemplatePreviewPage({
               exit={{ y: '-100%', opacity: 0, transition: { duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] } }}
               className="fixed inset-0 z-[9999] bg-[#2D0202] flex items-center justify-center p-6"
             >
-          <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=1000&auto=format&fit=crop')] bg-repeat bg-center" />
+          <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop')] bg-repeat bg-center" />
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0, rotateY: 45 }}
                 animate={{ scale: 1, opacity: 1, rotateY: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
                 className="relative z-10 w-full max-w-md aspect-[3/4] bg-[#FDF5E6] rounded-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-10 overflow-hidden border-8 border-[#D4AF37]/20"
               >
-                <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=400&auto=format&fit=crop" className="absolute top-0 right-0 w-40 h-40 opacity-20 rotate-90" alt="ornament" />
-                <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=400&auto=format&fit=crop" className="absolute bottom-0 left-0 w-40 h-40 opacity-20 -rotate-90" alt="ornament" />
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=400&auto=format&fit=crop" className="absolute top-0 right-0 w-40 h-40 opacity-20 rotate-90" alt="ornament" />
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=400&auto=format&fit=crop" className="absolute bottom-0 left-0 w-40 h-40 opacity-20 -rotate-90" alt="ornament" />
                 
                 <div className="text-center space-y-4">
                   <p className="text-[#800000] tracking-[0.4em] text-xs font-bold uppercase">Wedding Invitation</p>
@@ -547,13 +547,13 @@ export default function PublicTemplatePreviewPage({
           <motion.img 
             animate={{ y: [0, 20, 0], rotate: [0, 5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=600&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600&auto=format&fit=crop" 
             className="absolute top-0 right-0 w-80 h-80 opacity-20 pointer-events-none" 
           />
           <motion.img 
             animate={{ y: [0, -20, 0], rotate: [0, -5, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=600&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600&auto=format&fit=crop" 
             className="absolute bottom-0 left-0 w-80 h-80 opacity-20 pointer-events-none rotate-180" 
           />
 
@@ -609,7 +609,7 @@ export default function PublicTemplatePreviewPage({
         </section>
 
         <footer className="snap-section flex items-center justify-center bg-[#2D0202]">
-          <img src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=1000&auto=format&fit=crop" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-5 pointer-events-none" alt="bg" />
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-5 pointer-events-none" alt="bg" />
           <div className="relative z-10 space-y-6">
             <Heart className="mx-auto text-[#D4AF37] h-10 w-10 animate-beat" />
             <h3 className="text-6xl italic text-white">Khusen & Gita</h3>
