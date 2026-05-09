@@ -475,11 +475,11 @@ export default function PublicTemplatePreviewPage({
                 transition={{ duration: 1, delay: 0.2 }}
                 className="relative z-10 w-full max-w-md aspect-[3/4] bg-[#FDF5E6] rounded-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-10 overflow-hidden border-8 border-[#D4AF37]/20"
               >
-                {/* Elegant Floral Frame Corners */}
-                <img src="/templates/red-floral/frame.png" className="absolute top-0 right-0 w-32 h-32 opacity-40" alt="ornament" />
-                <img src="/templates/red-floral/frame.png" className="absolute top-0 left-0 w-32 h-32 opacity-40 -rotate-90" alt="ornament" />
-                <img src="/templates/red-floral/frame.png" className="absolute bottom-0 left-0 w-32 h-32 opacity-40 rotate-180" alt="ornament" />
-                <img src="/templates/red-floral/frame.png" className="absolute bottom-0 right-0 w-32 h-32 opacity-40 rotate-90" alt="ornament" />
+                {/* Elegant Floral Frame Corners with Transparency Fix */}
+                <img src="/templates/red-floral/frame.png" className="absolute top-0 right-0 w-32 h-32 opacity-80 mix-blend-multiply" alt="ornament" />
+                <img src="/templates/red-floral/frame.png" className="absolute top-0 left-0 w-32 h-32 opacity-80 -rotate-90 mix-blend-multiply" alt="ornament" />
+                <img src="/templates/red-floral/frame.png" className="absolute bottom-0 left-0 w-32 h-32 opacity-80 rotate-180 mix-blend-multiply" alt="ornament" />
+                <img src="/templates/red-floral/frame.png" className="absolute bottom-0 right-0 w-32 h-32 opacity-80 rotate-90 mix-blend-multiply" alt="ornament" />
                 
                 <div className="text-center space-y-4">
                   <p className="text-[#800000] tracking-[0.4em] text-xs font-bold uppercase">Wedding Invitation</p>
@@ -536,8 +536,8 @@ export default function PublicTemplatePreviewPage({
           </div>
           
           {/* Decorative Corner Ornaments - Using high-quality roses */}
-          <img src="/templates/red-floral/frame.png" className="absolute top-0 left-0 w-64 h-64 opacity-30 -rotate-90" alt="decor" />
-          <img src="/templates/red-floral/frame.png" className="absolute bottom-0 right-0 w-64 h-64 opacity-30 rotate-90" alt="decor" />
+          <img src="/templates/red-floral/frame.png" className="absolute top-0 left-0 w-64 h-64 opacity-50 -rotate-90 mix-blend-multiply" alt="decor" />
+          <img src="/templates/red-floral/frame.png" className="absolute bottom-0 right-0 w-64 h-64 opacity-50 rotate-90 mix-blend-multiply" alt="decor" />
         </section>
 
         <section className="snap-section flex items-center justify-center">
@@ -551,13 +551,13 @@ export default function PublicTemplatePreviewPage({
             animate={{ y: [0, 20, 0], rotate: [0, 5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             src="/templates/red-floral/frame.png" 
-            className="absolute top-0 right-0 w-80 h-80 opacity-20 pointer-events-none" 
+            className="absolute top-0 right-0 w-80 h-80 opacity-40 pointer-events-none mix-blend-multiply" 
           />
           <motion.img 
             animate={{ y: [0, -20, 0], rotate: [0, -5, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             src="/templates/red-floral/frame.png" 
-            className="absolute bottom-0 left-0 w-80 h-80 opacity-20 pointer-events-none rotate-180" 
+            className="absolute bottom-0 left-0 w-80 h-80 opacity-40 pointer-events-none rotate-180 mix-blend-multiply" 
           />
 
           <div className="absolute top-1/2 left-0 w-full h-px bg-[#D4AF37]/20" />
@@ -612,7 +612,7 @@ export default function PublicTemplatePreviewPage({
         </section>
 
         <footer className="snap-section flex items-center justify-center bg-[#2D0202]">
-          <img src="/templates/red-floral/frame.png" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-10 pointer-events-none" alt="bg" />
+          <img src="/templates/red-floral/frame.png" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-20 pointer-events-none mix-blend-multiply" alt="bg" />
           <div className="relative z-10 space-y-6">
             <Heart className="mx-auto text-[#D4AF37] h-10 w-10 animate-beat" />
             <h3 className="text-6xl italic text-white">Khusen & Gita</h3>
