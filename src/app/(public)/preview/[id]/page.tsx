@@ -211,6 +211,53 @@ function WishesSection({ themeColor }: { themeColor: string }) {
   )
 }
 
+function FallingPetals() {
+  const [petals, setPetals] = React.useState<{id: number, left: string, duration: number, delay: number, size: number, type: 'petal'|'leaf'}[]>([])
+  
+  React.useEffect(() => {
+    const newPetals = Array.from({ length: 30 }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      duration: Math.random() * 10 + 15,
+      delay: Math.random() * 10,
+      size: Math.random() * 15 + 8,
+      type: Math.random() > 0.6 ? 'leaf' : 'petal' as 'petal' | 'leaf'
+    }))
+    setPetals(newPetals)
+  }, [])
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
+      {petals.map((p) => (
+        <motion.div
+          key={p.id}
+          initial={{ top: -50, left: p.left, opacity: 0, rotate: 0 }}
+          animate={{ 
+            top: '110%', 
+            left: [p.left, `calc(${p.left} + ${Math.random() * 100 - 50}px)`, p.left],
+            opacity: [0, 1, 1, 0],
+            rotate: [0, 180, 360, 720]
+          }}
+          transition={{ 
+            duration: p.duration, 
+            repeat: Infinity, 
+            ease: "linear",
+            delay: p.delay
+          }}
+          style={{
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.type === 'petal' ? '#800000' : '#2D5A27',
+            borderRadius: p.type === 'petal' ? '50% 0 50% 50%' : '100% 0 100% 0',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            filter: 'blur(0.5px)'
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
 // ─── MAIN PAGE COMPONENT ─────────────────────────────────────────────────────
 
 export default function PublicTemplatePreviewPage({
@@ -526,6 +573,7 @@ export default function PublicTemplatePreviewPage({
 
         <FloatingMusic isPlaying={isPlaying} onToggle={() => setIsPlaying(p => !p)} />
         <BackBtn href={backUrl} label={backLabel} />
+        {hasOpened && <FallingPetals />}
 
         {/* Hero Section */}
         <section className="snap-section flex items-center justify-center">
