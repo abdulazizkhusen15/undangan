@@ -212,17 +212,25 @@ function WishesSection({ themeColor }: { themeColor: string }) {
 }
 
 function FallingPetals() {
-  const [petals, setPetals] = React.useState<{id: number, left: string, duration: number, delay: number, size: number, type: 'petal'|'leaf'}[]>([])
+  const [petals, setPetals] = React.useState<{id: number, left: string, duration: number, delay: number, size: number, type: 'petal'|'leaf', color: string}[]>([])
   
   React.useEffect(() => {
-    const newPetals = Array.from({ length: 30 }).map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      duration: Math.random() * 10 + 15,
-      delay: Math.random() * 10,
-      size: Math.random() * 15 + 8,
-      type: Math.random() > 0.6 ? 'leaf' : 'petal' as 'petal' | 'leaf'
-    }))
+    const colors = {
+      petal: ['#800000', '#A52A2A', '#D42424'],
+      leaf: ['#2D5A27', '#4F7942', '#3B5323']
+    }
+    const newPetals = Array.from({ length: 40 }).map((_, i) => {
+      const type = Math.random() > 0.4 ? 'leaf' : 'petal'
+      return {
+        id: i,
+        left: `${Math.random() * 100}%`,
+        duration: Math.random() * 8 + 12,
+        delay: Math.random() * 15,
+        size: Math.random() * 12 + 6,
+        type: type as 'petal' | 'leaf',
+        color: colors[type][Math.floor(Math.random() * 3)]
+      }
+    })
     setPetals(newPetals)
   }, [])
 
@@ -234,23 +242,23 @@ function FallingPetals() {
           initial={{ top: -50, left: p.left, opacity: 0, rotate: 0 }}
           animate={{ 
             top: '110%', 
-            left: [p.left, `calc(${p.left} + ${Math.random() * 100 - 50}px)`, p.left],
-            opacity: [0, 1, 1, 0],
+            left: [p.left, `calc(${p.left} + ${Math.random() * 120 - 60}px)`, p.left],
+            opacity: [0, 0.8, 0.8, 0],
             rotate: [0, 180, 360, 720]
           }}
           transition={{ 
             duration: p.duration, 
             repeat: Infinity, 
-            ease: "linear",
+            ease: "easeInOut",
             delay: p.delay
           }}
           style={{
             width: p.size,
-            height: p.size,
-            backgroundColor: p.type === 'petal' ? '#800000' : '#2D5A27',
+            height: p.type === 'leaf' ? p.size * 1.5 : p.size,
+            backgroundColor: p.color,
             borderRadius: p.type === 'petal' ? '50% 0 50% 50%' : '100% 0 100% 0',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-            filter: 'blur(0.5px)'
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            filter: 'blur(0.3px)'
           }}
         />
       ))}
@@ -595,13 +603,9 @@ export default function PublicTemplatePreviewPage({
               <p className="text-[#D4AF37] uppercase tracking-[0.6em] text-xs">The Wedding of</p>
               <h1 className="text-8xl md:text-9xl italic text-white drop-shadow-2xl">Khusen & Gita</h1>
             </motion.div>
-            <div className="h-px w-32 bg-[#D4AF37] mx-auto" />
+          <div className="h-px w-32 bg-[#D4AF37] mx-auto" />
             <p className="text-2xl text-[#D4AF37]/80 tracking-[0.2em] font-light italic">Sunday, 15 June 2026</p>
           </div>
-          
-          {/* Decorative Corner Ornaments - Using high-quality roses */}
-          <img src="/templates/red-floral/frame.png" className="absolute top-0 left-0 w-64 h-64 opacity-50 -rotate-90 mix-blend-multiply" alt="decor" />
-          <img src="/templates/red-floral/frame.png" className="absolute bottom-0 right-0 w-64 h-64 opacity-50 rotate-90 mix-blend-multiply" alt="decor" />
         </section>
 
         <section className="snap-section flex items-center justify-center">
@@ -610,20 +614,6 @@ export default function PublicTemplatePreviewPage({
 
         {/* Mempelai Section */}
         <section className="snap-section py-24 px-6">
-          {/* Animated Background Ornaments */}
-          <motion.img 
-            animate={{ y: [0, 20, 0], rotate: [0, 5, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            src="/templates/red-floral/frame.png" 
-            className="absolute top-0 right-0 w-80 h-80 opacity-40 pointer-events-none mix-blend-multiply" 
-          />
-          <motion.img 
-            animate={{ y: [0, -20, 0], rotate: [0, -5, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            src="/templates/red-floral/frame.png" 
-            className="absolute bottom-0 left-0 w-80 h-80 opacity-40 pointer-events-none rotate-180 mix-blend-multiply" 
-          />
-
           <div className="absolute top-1/2 left-0 w-full h-px bg-[#D4AF37]/20" />
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20">
             <motion.div 
@@ -676,7 +666,6 @@ export default function PublicTemplatePreviewPage({
         </section>
 
         <footer className="snap-section flex items-center justify-center bg-[#2D0202]">
-          <img src="/templates/red-floral/frame.png" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] opacity-20 pointer-events-none mix-blend-multiply" alt="bg" />
           <div className="relative z-10 space-y-6">
             <Heart className="mx-auto text-[#D4AF37] h-10 w-10 animate-beat" />
             <h3 className="text-6xl italic text-white">Khusen & Gita</h3>
