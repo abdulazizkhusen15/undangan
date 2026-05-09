@@ -475,7 +475,7 @@ export default function PublicTemplatePreviewPage({
                 transition={{ duration: 1, delay: 0.2 }}
                 className="relative z-10 w-full max-w-md aspect-[3/4] bg-[#FDF5E6] rounded-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-10 overflow-hidden border-8 border-[#D4AF37]/20"
               >
-                { {/* Elegant Floral Ornaments - Only 2 as requested */} }
+                {/* Elegant Floral Ornaments - Only 2 as requested */}
                 <img 
                   src="/templates/red-floral/frame.png" 
                   className="absolute top-0 right-0 w-56 h-56 opacity-90 mix-blend-multiply" 
