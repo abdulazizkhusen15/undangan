@@ -212,23 +212,24 @@ function WishesSection({ themeColor }: { themeColor: string }) {
 }
 
 function FallingPetals() {
-  const [petals, setPetals] = React.useState<{id: number, left: string, duration: number, delay: number, size: number, type: 'petal'|'leaf', color: string}[]>([])
+  const [petals, setPetals] = React.useState<{id: number, left: number, duration: number, delay: number, size: number, type: 'petal'|'leaf', color: string, drift: number}[]>([])
   
   React.useEffect(() => {
     const colors = {
       petal: ['#800000', '#A52A2A', '#D42424'],
       leaf: ['#2D5A27', '#4F7942', '#3B5323']
     }
-    const newPetals = Array.from({ length: 40 }).map((_, i) => {
+    const newPetals = Array.from({ length: 50 }).map((_, i) => {
       const type = Math.random() > 0.4 ? 'leaf' : 'petal'
       return {
         id: i,
-        left: `${Math.random() * 100}%`,
-        duration: Math.random() * 8 + 12,
-        delay: Math.random() * 15,
-        size: Math.random() * 12 + 6,
+        left: Math.random() * 100,
+        duration: Math.random() * 8 + 10,
+        delay: Math.random() * 10,
+        size: Math.random() * 10 + 6,
         type: type as 'petal' | 'leaf',
-        color: colors[type][Math.floor(Math.random() * 3)]
+        color: colors[type][Math.floor(Math.random() * 3)],
+        drift: Math.random() * 200 - 100
       }
     })
     setPetals(newPetals)
@@ -239,12 +240,13 @@ function FallingPetals() {
       {petals.map((p) => (
         <motion.div
           key={p.id}
-          initial={{ top: -50, left: p.left, opacity: 0, rotate: 0 }}
+          initial={{ top: -50, left: `${p.left}vw`, opacity: 0, rotate: 0 }}
           animate={{ 
-            top: '110%', 
-            left: [p.left, `calc(${p.left} + ${Math.random() * 120 - 60}px)`, p.left],
+            top: '110vh', 
+            left: [`${p.left}vw`, `${p.left + (p.drift/10)}vw`, `${p.left}vw`],
             opacity: [0, 0.8, 0.8, 0],
-            rotate: [0, 180, 360, 720]
+            rotate: [0, 180, 360, 720],
+            x: [0, p.drift, 0]
           }}
           transition={{ 
             duration: p.duration, 
@@ -254,7 +256,7 @@ function FallingPetals() {
           }}
           style={{
             width: p.size,
-            height: p.type === 'leaf' ? p.size * 1.5 : p.size,
+            height: p.type === 'leaf' ? p.size * 1.6 : p.size,
             backgroundColor: p.color,
             borderRadius: p.type === 'petal' ? '50% 0 50% 50%' : '100% 0 100% 0',
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
@@ -530,29 +532,7 @@ export default function PublicTemplatePreviewPage({
                 transition={{ duration: 1, delay: 0.2 }}
                 className="relative z-10 w-full max-w-md aspect-[3/4] bg-[#FDF5E6] rounded-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-10 overflow-hidden border-8 border-[#D4AF37]/20"
               >
-                {/* Elegant Floral Ornaments - Only 2 as requested */}
-                <img 
-                  src="/templates/red-floral/frame.png" 
-                  className="absolute top-0 right-0 w-56 h-56 opacity-90 mix-blend-multiply" 
-                  style={{ 
-                    maskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)', 
-                    WebkitMaskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)',
-                    filter: 'brightness(1.1) contrast(1.1)'
-                  }}
-                  alt="ornament" 
-                />
-                <img 
-                  src="/templates/red-floral/frame.png" 
-                  className="absolute bottom-0 left-0 w-56 h-56 opacity-90 rotate-180 mix-blend-multiply" 
-                  style={{ 
-                    maskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)', 
-                    WebkitMaskImage: 'radial-gradient(circle at 70% 30%, black 30%, transparent 70%)',
-                    filter: 'brightness(1.1) contrast(1.1)'
-                  }}
-                  alt="ornament" 
-                />
-                
-                <div className="text-center space-y-4">
+                 <div className="text-center space-y-4">
                   <p className="text-[#800000] tracking-[0.4em] text-xs font-bold uppercase">Wedding Invitation</p>
                   <div className="h-px w-12 bg-[#D4AF37] mx-auto" />
                 </div>
